@@ -1,0 +1,27 @@
+#!/bin/bash
+
+start=$1
+finish=$2
+pad=$3
+name=$4
+
+if [ -z "$pad" ]; then
+    pad=1
+fi
+
+if [ -z "$name" ]; then
+    name="scan"
+fi
+
+for i in $(seq -f "%0"$pad"g" $start $finish)
+do
+    if (( $i % 2 == 0 ))
+    then
+        notify-send -a "Hp-Scanner-Script" "ROTATE Page" "Scanning page $i"
+    else
+        notify-send -a "Hp-Scanner-Script" "NEW Page" "Scanning page $i"
+    fi
+    hp-scan \
+    --device=hpaio:/usb/Deskjet_1510_series?serial=CN3AL17JF805XJ \
+    --output=$name""$i".jpg"
+done

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mpg123 $HOME/.local/share/sounds/alert.mp3
